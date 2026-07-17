@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Centro Agropecuario Ecológico Casaya</title>
+    <style>
+        :root {
+            --color-crema: #FAF6EE; /* 60% Fondo */
+            --color-verde: #1C5733; /* 30% Estructura */
+            --color-borgona: #931A25; /* 10% Títulos y precios */
+            --color-dorado: #F4B234; /* 10% Botones (CTA) */
+            --color-texto: #2c2c2c;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--color-crema);
+            color: var(--color-texto);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4 { color: var(--color-borgona); }
+        a { text-decoration: none; color: inherit; }
+        
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+        .texto-centrado { text-align: center; }
+
+        /* === BOTONES === */
+        .btn {
+            display: inline-block;
+            background-color: var(--color-dorado);
+            color: var(--color-verde);
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s ease;
+            text-align: center;
+            font-size: 1rem;
+        }
+        .btn:hover { background-color: #e0a030; transform: translateY(-2px); }
+        .btn-whatsapp-verde { background-color: #25D366; color: white; }
+
+        /* === HEADER === */
+        header {
+            background-color: var(--color-verde);
+            color: white;
+            padding: 10px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .logo-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .logo-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            background-color: white;
+            border: 2px solid var(--color-dorado);
+        }
+        .logo-textos h1 { color: white; font-size: 1.2rem; margin: 0; }
+        .logo-textos p { color: var(--color-dorado); font-size: 0.8rem; margin: 0; font-style: italic; }
+        .nav-links a { color: white; margin-left: 20px; font-weight: 500; }
+        .nav-links a:hover { color: var(--color-dorado); }
+
+        /* === HERO === */
+        #hero {
+            /* Fondo de gradiente verde para mantener la estética */
+            background-image: linear-gradient(rgba(28, 87, 51, 0.8), rgba(28, 87, 51, 0.8)), url('https://images.unsplash.com/photo-1516467508483-a7212febe31a?q=80&w=2073&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 100px 20px;
+        }
+        #hero h2 { color: white; font-size: 2.5rem; margin-bottom: 15px; }
+        #hero p { font-size: 1.2rem; max-width: 600px; margin: 0 auto 30px auto; }
+
+        /* === SECCIONES GENERALES === */
+        section { padding: 60px 0; }
+        .titulo-seccion { text-align: center; margin-bottom: 40px; font-size: 2rem; }
+
+        /* === NOSOTROS === */
+        #nosotros .contenido { max-width: 800px; margin: 0 auto; text-align: center; }
+        .iconos-beneficios { display: flex; justify-content: center; gap: 30px; margin-top: 30px; flex-wrap: wrap; }
+        .beneficio { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.05); width: 200px; }
+        .beneficio span { font-size: 2rem; display: block; margin-bottom: 10px; }
+
+        /* === PRODUCTOS === */
+        #productos { background-color: white; }
+        .grid-productos { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .card-producto {
+            border: 2px solid var(--color-verde);
+            border-radius: 10px;
+            padding: 25px;
+            text-align: center;
+            background: var(--color-crema);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        /* Estilo estratégico para las fotos de los productos */
+        .card-producto img {
+            width: 100%;
+            height: 250px; /* Tamaño fijo para que ambas tarjetas se vean iguales */
+            object-fit: cover; /* Evita que la foto se deforme */
+            border-radius: 8px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            background-color: #eee; /* Fondo por si la imagen tarda en cargar */
+        }
+        .card-producto h3 { margin-bottom: 10px; }
+        .precio-producto { font-size: 2rem; color: var(--color-borgona); font-weight: bold; margin: 15px 0; }
+
+        /* === PASOS === */
+        .grid-pasos { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; text-align: center; }
+        .paso-numero { background: var(--color-verde); color: var(--color-dorado); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; font-weight: bold; font-size: 1.2rem; }
+
+        /* === FORMULARIO === */
+        #formulario { background-color: var(--color-crema); }
+        form { background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); max-width: 650px; margin: 0 auto; }
+        .form-group { margin-bottom: 20px; }
+        .form-row { display: flex; gap: 15px; }
+        .form-row .form-group { flex: 1; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; color: var(--color-verde); }
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-family: inherit;
+        }
+        .radio-group label { display: inline-block; margin-right: 15px; font-weight: normal; }
+        
+        /* Caja de cálculo automático */
+        .caja-calculo {
+            background-color: var(--color-verde);
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            margin: 20px 0;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+        .nota-delivery { font-size: 0.85rem; color: #666; text-align: center; margin-top: 5px; }
+
+        /* === FOOTER === */
+        footer { background-color: var(--color-verde); color: white; padding: 40px 0; text-align: center; }
+        footer .logo-footer { width: 80px; height: 80px; border-radius: 50%; border: 2px solid var(--color-dorado); margin-bottom: 15px; object-fit: cover; background-color: white; }
+        footer h3 { color: white; }
+        footer p { color: #e0e0e0; margin: 5px 0; }
+        footer a { color: var(--color-dorado); }
+
+        /* === BOTÓN FLOTANTE WHATSAPP === */
+        .btn-flotante {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background-color: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            z-index: 999;
+            animation: latir 2s infinite;
+        }
+        @keyframes latir { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .form-row { flex-direction: column; gap: 0; }
+            #hero h2 { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== HEADER ===== -->
+    <header>
+        <div class="nav-container">
+            <div class="logo-header">
+                <!-- LOGO LOCAL -->
+                <img src="imagenes/Logo.png" alt="Logo Casaya" class="logo-img">
+                <div class="logo-textos">
+                    <h1>Centro Agropecuario Ecológico Casaya</h1>
+                    <p>"Naturalmente lo mejor para ti"</p>
+                </div>
+            </div>
+            <nav class="nav-links">
+                <a href="#nosotros">Nosotros</a>
+                <a href="#productos">Productos</a>
+                <a href="#formulario">Cotizar</a>
+                <a href="#contacto">Contacto</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ===== HERO ===== -->
+    <section id="hero">
+        <h2>Cerdos en pie de raza cambur</h2>
+        <p>Criados con cuidado natural en Piura, con entrega a domicilio en toda la región Lambayeque. Pedidos con 48 horas de anticipación.</p>
+        <a href="#formulario" class="btn">Cotizar por WhatsApp</a>
+    </section>
+
+    <!-- ===== NOSOTROS ===== -->
+    <section id="nosotros">
+        <div class="container contenido">
+            <h2 class="titulo-sección">Crianza natural, calidad de siempre</h2>
+            <p>En el Centro Agropecuario Ecológico Casaya nos dedicamos a la crianza de cerdos en pie bajo un enfoque natural y respetuoso con el animal. Nuestros cerdos crecen en un ambiente amplio, con alimentación balanceada y sin acelerantes.</p>
+            <p>Ubicados en un centro poblado de Piura, llevamos años suministrando cerdos en pie a familias, restaurantes y comerciantes de toda la región Lambayeque.</p>
+            
+            <div class="iconos-beneficios">
+                <div class="beneficio">
+                    <span>🌿</span>
+                    <strong>Alimentación natural</strong>
+                </div>
+                <div class="beneficio">
+                    <span>🐖</span>
+                    <strong>Raza cambur</strong>
+                </div>
+                <div class="beneficio">
+                    <span>🤝</span>
+                    <strong>Atención directa</strong>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== PRODUCTOS ===== -->
+    <section id="productos">
+        <div class="container">
+            <h2 class="titulo-sección">Nuestros cerdos en pie</h2>
+            <p class="texto-centrado" style="margin-bottom: 40px;">Cotiza por kilo. Las condiciones específicas se coordinan directamente por WhatsApp.</p>
+            
+            <div class="grid-productos">
+                <!-- PRODUCTO 1 -->
+                <div class="card-producto">
+                    <h3>Cerdo Mediano / Adulto</h3>
+                    <!-- FOTO CERDO MEDIANO -->
+                    <img src="imagenes/CERDOSMEDIANOS.png" alt="Cerdo mediano en pie raza cambur">
+                    <p>Cerdo en pie de tamaño estándar, ideal para familias, eventos y comerciantes. Crianza natural.</p>
+                    <div>
+                        <div class="precio-producto">S/ 15.00 <span style="font-size: 1rem; color: #666;">por kilo</span></div>
+                        <a href="https://wa.me/51912392157?text=Hola%20Casaya,%20quisiera%20cotizar%20la%20compra%20de%20un%20cerdo%20mediano/adulto" target="_blank" class="btn">Cotizar aquí</a>
+                    </div>
+                </div>
+
+                <!-- PRODUCTO 2 -->
+                <div class="card-producto">
+                    <h3>Lechón</h3>
+                    <!-- FOTO LECHON -->
+                    <img src="imagenes/LECHONES.png" alt="Lechón en pie raza cambur">
+                    <p>Cerdo en pie de menor tamaño, perfecto para ocasiones especiales. Crianza natural con altos estándares.</p>
+                    <div>
+                        <div class="precio-producto">S/ 30.00 <span style="font-size: 1rem; color: #666;">por kilo</span></div>
+                        <a href="https://wa.me/51912392157?text=Hola%20Casaya,%20quisiera%20cotizar%20la%20compra%20de%20un%20lechón" target="_blank" class="btn">Cotizar aquí</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CÓMO PEDIR ===== -->
+    <section id="pasos" style="background-color: white;">
+        <div class="container">
+            <h2 class="titulo-sección">Tu pedido en 4 pasos</h2>
+            <div class="grid-pasos">
+                <div><div class="paso-numero">1</div><h4>Elige el tipo</h4><p>Cerdo mediano o lechón, según lo que necesites.</p></div>
+                <div><div class="paso-numero">2</div><h4>Cotiza</h4><p>Llena el formulario o escribe por WhatsApp.</p></div>
+                <div><div class="paso-numero">3</div><h4>Coordina entrega</h4><p>Confirma fecha y zona con 48h de anticipación.</p></div>
+                <div><div class="paso-numero">4</div><h4>Recibe tu pedido</h4><p>Te llevamos el cerdo en pie a tu domicilio.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FORMULARIO DE COTIZACIÓN ===== -->
+    <section id="formulario">
+        <div class="container">
+            <h2 class="titulo-seccion">Solicita tu cotización</h2>
+            <p class="texto-centrado" style="margin-bottom: 30px;">Completa los datos. El cálculo es automático y se enviará por WhatsApp.</p>
+            
+            <form id="formCotizacion" onsubmit="enviarCotizacion(event)">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Nombre completo *</label>
+                        <input type="text" id="nombre" required placeholder="Tu nombre">
+                    </div>
+                    <div class="form-group">
+                        <label>Teléfono / Celular *</label>
+                        <input type="tel" id="telefono" required placeholder="9XX XXX XXX">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Tipo de cerdo en pie *</label>
+                        <select id="tipoCerdo" required onchange="calcularPrecio()">
+                            <option value="">Selecciona...</option>
+                            <option value="Cerdo Mediano/Adulto|15">Cerdo Mediano / Adulto (S/ 15/kg)</option>
+                            <option value="Lechón|30">Lechón (S/ 30/kg)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Kilos aproximados *</label>
+                        <input type="number" id="kilos" required placeholder="Ej. 20" oninput="calcularPrecio()">
+                    </div>
+                </div>
+
+                <!-- Cálculo automático -->
+                <div class="caja-calculo" id="cajaCalculo">
+                    Costo estimado del cerdo: S/ 0.00
+                </div>
+
+                <div class="form-group">
+                    <label>Tipo de entrega *</label>
+                    <div class="radio-group">
+                        <input type="radio" id="delivery" name="entrega" value="Delivery a domicilio" checked onchange="actualizarNotaEntrega()">
+                        <label for="delivery" style="display:inline;">Delivery a domicilio</label>
+                        <input type="radio" id="recojo" name="entrega" value="Recojo en zona" onchange="actualizarNotaEntrega()">
+                        <label for="recojo" style="display:inline;">Recojo en zona acordada</label>
+                    </div>
+                    <p class="nota-delivery" id="notaEntrega">* El costo del delivery se evaluará en el chat de WhatsApp según tu ubicación.</p>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Provincia *</label>
+                        <select id="provincia" required onchange="cargarDistritos()">
+                            <option value="">Selecciona...</option>
+                            <option value="Chiclayo">Chiclayo</option>
+                            <option value="Lambayeque">Lambayeque</option>
+                            <option value="Ferreñafe">Ferreñafe</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Distrito *</label>
+                        <select id="distrito" required>
+                            <option value="">Selecciona provincia primero</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Referencia (opcional)</label>
+                    <textarea id="referencia" rows="2" placeholder="Alguna referencia de tu ubicación o comentario"></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-whatsapp-verde" style="width: 100%; font-size: 1.1rem;">💬 Enviar cotización por WhatsApp</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- ===== CONTACTO Y FOOTER ===== -->
+    <footer id="contacto">
+        <div class="container">
+            <!-- LOGO LOCAL -->
+            <img src="imagenes/Logo.png" alt="Logo Casaya" class="logo-footer">
+            <h3>Centro Agropecuario Ecológico Casaya</h3>
+            <p style="color: var(--color-dorado); font-style: italic;">"Naturalmente lo mejor para ti"</p>
+            <br>
+            <p>💬 WhatsApp: <a href="https://wa.me/51912392157" target="_blank">912 392 157</a></p>
+            <p>✉️ Correo: centroagropecuariocasaya@gmail.com</p>
+            <p>📍 Criadero: Centro poblado, Piura</p>
+            <p>🚚 Entrega: Toda la región Lambayeque</p>
+            <br>
+            <p><strong>© 2026 Casaya. Todos los derechos reservados.</strong></p>
+            <p>Pedidos con 48 horas de anticipación.</p>
+        </div>
+    </footer>
+
+    <!-- ===== BOTÓN FLOTANTE WHATSAPP ===== -->
+    <a href="https://wa.me/51912392157?text=Hola%20Casaya,%20quisiera%20información%20sobre%20cerdos%20en%20pie" target="_blank" class="btn-flotante">💬</a>
+
+    <!-- ===== SCRIPTS (LÓGICA DE UBICACIÓN, CÁLCULO Y WHATSAPP) ===== -->
+    <script>
+        // Variables de precios (Fácil de editar en el futuro)
+        let costoEstimado = 0;
+
+        // 1. CÁLCULO AUTOMÁTICO
+        function calcularPrecio() {
+            const select = document.getElementById('tipoCerdo');
+            const kilos = parseFloat(document.getElementById('kilos').value) || 0;
+            
+            if (select.value && kilos > 0) {
+                const precioUnitario = parseFloat(select.value.split('|')[1]);
+                costoEstimado = precioUnitario * kilos;
+                document.getElementById('cajaCalculo').innerText = `Costo estimado del cerdo: S/ ${costoEstimado.toFixed(2)} ${kilos > 0 ? '(+ costo de delivery a coordinar)' : ''}`;
+            } else {
+                document.getElementById('cajaCalculo').innerText = 'Costo estimado del cerdo: S/ 0.00';
+                costoEstimado = 0;
+            }
+        }
+
+        // 2. NOTA DE DELIVERY/RECOJO
+        function actualizarNotaEntrega() {
+            const entrega = document.querySelector('input[name="entrega"]:checked').value;
+            const nota = document.getElementById('notaEntrega');
+            if (entrega.includes('Delivery')) {
+                nota.innerText = '* El costo del delivery se evaluará en el chat de WhatsApp según tu ubicación.';
+            } else {
+                nota.innerText = '* Coordinaremos el punto exacto de recojo en el chat de WhatsApp.';
+            }
+        }
+
+        // 3. UBICACIONES (Solo Lambayeque)
+        const ubicaciones = {
+            "Chiclayo": ["Chiclayo", "Cayaltí", "Chongoyape", "Eten", "Eten Puerto", "José Leonardo Ortiz", "La Victoria", "Lagunas (Mocupe)", "Monsefú", "Nueva Arica", "Oyotún", "Picsi", "Pimentel", "Pomalca", "Pucalá", "Reque", "Santa Rosa", "Saña", "Tumán", "Patapo"],
+            "Lambayeque": ["Lambayeque", "Chóchope", "Íllimo", "Jayanca", "Mochumí", "Mórrope", "Motupe", "Olmos", "Pacora", "Salas", "San José", "Túcume"],
+            "Ferreñafe": ["Ferreñafe", "Cañaris", "Incahuasi", "Manuel Antonio Mesones Muro", "Pítipo", "Pueblo Nuevo"]
+        };
+
+        function cargarDistritos() {
+            const prov = document.getElementById('provincia').value;
+            const distSelect = document.getElementById('distrito');
+            
+            distSelect.innerHTML = '<option value="">Selecciona...</option>';
+
+            if (prov) {
+                ubicaciones[prov].forEach(dist => {
+                    distSelect.innerHTML += `<option value="${dist}">${dist}</option>`;
+                });
+            }
+        }
+
+        // 4. ENVÍO A WHATSAPP
+        function enviarCotizacion(event) {
+            event.preventDefault();
+            
+            const nombre = document.getElementById('nombre').value;
+            const telefono = document.getElementById('telefono').value;
+            const tipoCerdoText = document.getElementById('tipoCerdo').selectedOptions[0].text;
+            const kilos = document.getElementById('kilos').value;
+            const entrega = document.querySelector('input[name="entrega"]:checked').value;
+            const provincia = document.getElementById('provincia').value;
+            const distrito = document.getElementById('distrito').value;
+            const referencia = document.getElementById('referencia').value;
+
+            let mensaje = "*Nueva Cotización - Casaya*\n\n";
+            mensaje += "*Nombre:* " + nombre + "\n";
+            mensaje += "*Teléfono:* " + telefono + "\n";
+            mensaje += "*Tipo de cerdo en pie:* " + tipoCerdoText + "\n";
+            mensaje += "*Kilos aprox:* " + kilos + " kg\n";
+            mensaje += "*Costo estimado:* S/ " + costoEstimado.toFixed(2) + "\n";
+            mensaje += "*Entrega:* " + entrega + "\n";
+            mensaje += "*Ubicación:* " + distrito + ", " + provincia + ", Lambayeque\n";
+            if(referencia) {
+                mensaje += "*Referencia:* " + referencia + "\n";
+            }
+            mensaje += "\nQuedo a la espera de su confirmación. ¡Gracias!";
+
+            let url = "https://wa.me/51912392157?text=" + encodeURIComponent(mensaje);
+            window.open(url, '_blank');
+        }
+    </script>
+
+</body>
+</html>
